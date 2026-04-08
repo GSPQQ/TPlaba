@@ -1,34 +1,46 @@
 @model laba2.Models.DatabaseCourseModel
 
 @{
-    ViewData["Title"] = "Просмотр курса";
+    ViewData["Title"] = "Просмотр музея";
 }
 
-<h1>Просмотр курса</h1>
+<h1>Просмотр музея</h1>
 
 <div class="mb-2">
     @Html.LabelFor(m => m.Id): @Html.DisplayFor(m => m.Id)
 </div>
 <div class="mb-2">
-    @Html.LabelFor(m => m.Title): @Html.DisplayFor(m => m.Title)
+    @Html.LabelFor(m => m.Name): @Html.DisplayFor(m => m.Name)
 </div>
 <div class="mb-2">
-    @Html.LabelFor(m => m.Instructor): @Html.DisplayFor(m => m.Instructor)
+    @Html.LabelFor(m => m.Curator): @Html.DisplayFor(m => m.Curator)
 </div>
 <div class="mb-2">
-    @Html.LabelFor(m => m.Credits): @Html.DisplayFor(m => m.Credits)
+    @Html.LabelFor(m => m.Established): @Html.DisplayFor(m => m.Established)
 </div>
 <div class="mb-2">
-    @Html.LabelFor(m => m.StartDate): @Html.DisplayFor(m => m.StartDate)
+    @Html.LabelFor(m => m.Location): @Html.DisplayFor(m => m.Location)
 </div>
 <div class="mb-2">
-    @Html.LabelFor(m => m.TuitionFee): @Html.DisplayFor(m => m.TuitionFee)
+    @Html.LabelFor(m => m.TicketPrice): @Html.DisplayFor(m => m.TicketPrice)
 </div>
 <div class="mb-2">
-    @Html.LabelFor(m => m.IsExamRequired): @Html.DisplayFor(m => m.IsExamRequired)
+    @Html.LabelFor(m => m.IsGuidedToursAvailable): @Html.DisplayFor(m => m.IsGuidedToursAvailable)
 </div>
 <div class="mb-2">
-    @Html.LabelFor(m => m.Semester): @Html.DisplayFor(m => m.Semester)
+    @Html.LabelFor(m => m.OpeningHours): @Html.DisplayFor(m => m.OpeningHours)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.CollectionSize): @Html.DisplayFor(m => m.CollectionSize)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.Description): @Html.DisplayFor(m => m.Description)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.ContactPhone): @Html.DisplayFor(m => m.ContactPhone)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.Website): @Html.DisplayFor(m => m.Website)
 </div>
 
 <p>

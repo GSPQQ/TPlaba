@@ -1,22 +1,22 @@
 @model IEnumerable<laba2.Models.DatabaseCourseModel>
 
 @{
-    ViewData["Title"] = "Список курсов";
+    ViewData["Title"] = "Список музеев";
 }
 
-<h1>Список курсов</h1>
+<h1>Список музеев</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Добавить курс</a>
-    <a asp-action="AllData" class="btn btn-outline-secondary">Просмотреть все данные (while)</a>
+    <a asp-action="Create" class="btn btn-primary">Добавить музей</a>
+    <a asp-action="AllData" class="btn btn-outline-secondary">Просмотреть все музеи (while)</a>
 </p>
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Название</th>
-            <th>Преподаватель</th>
-            <th>Семестр</th>
+            <th>Главный хранитель</th>
+            <th>Местоположение</th>
             <th></th>
         </tr>
     </thead>
@@ -24,9 +24,9 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(_ => item.Title)</td>
-            <td>@Html.DisplayFor(_ => item.Instructor)</td>
-            <td>@Html.DisplayFor(_ => item.Semester)</td>
+            <td>@Html.DisplayFor(_ => item.Name)</td>
+            <td>@Html.DisplayFor(_ => item.Curator)</td>
+            <td>@Html.DisplayFor(_ => item.Location)</td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Просмотр</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
