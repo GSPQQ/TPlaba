@@ -1,0 +1,37 @@
+@model laba2.Models.DatabaseCourseModel
+
+@{
+    ViewData["Title"] = "Просмотр курса";
+}
+
+<h1>Просмотр курса</h1>
+
+<div class="mb-2">
+    @Html.LabelFor(m => m.Id): @Html.DisplayFor(m => m.Id)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.Title): @Html.DisplayFor(m => m.Title)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.Instructor): @Html.DisplayFor(m => m.Instructor)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.Credits): @Html.DisplayFor(m => m.Credits)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.StartDate): @Html.DisplayFor(m => m.StartDate)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.TuitionFee): @Html.DisplayFor(m => m.TuitionFee)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.IsExamRequired): @Html.DisplayFor(m => m.IsExamRequired)
+</div>
+<div class="mb-2">
+    @Html.LabelFor(m => m.Semester): @Html.DisplayFor(m => m.Semester)
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Редактировать</a>
+    <a asp-action="Index" class="btn btn-secondary">Назад к списку</a>
+</p>

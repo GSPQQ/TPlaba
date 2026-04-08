@@ -1,0 +1,99 @@
+@model CalculatorModel
+
+@{
+    ViewData["Title"] = "Калькулятор";
+    decimal expected = ViewBag.ExpectedResult is decimal d ? d : 0m;
+
+    bool op1HasError = ViewData.ModelState.TryGetValue(nameof(Model.Operand1), out var op1Entry) &&
+                       op1Entry?.Errors?.Count > 0;
+    bool op2HasError = ViewData.ModelState.TryGetValue(nameof(Model.Operand2), out var op2Entry) &&
+                       op2Entry?.Errors?.Count > 0;
+
+    string operand1Class = $"form-control textBoxStyle{(op1HasError ? " inputError" : "")}";
+    string operand2Class = $"form-control textBoxStyle{(op2HasError ? " inputError" : "")}";
+}
+
+<h1 class="display-6">@ViewData["Title"]</h1>
+
+@using (Html.BeginForm("Index", "Calculator", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Operand1, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Operand1, new { @class = operand1Class, type = "number", step = "1" })
+        @Html.ValidationMessageFor(m => m.Operand1, null, new { @class = "calc-error-message" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Operand2, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Operand2, new { @class = operand2Class, type = "number", step = "any" })
+        @Html.ValidationMessageFor(m => m.Operand2, null, new { @class = "calc-error-message" })
+    </div>
+
+    <div class="mb-3">
+        <div class="form-label">Операция</div>
+
+        <div class="form-check">
+            @Html.RadioButtonFor(m => m.Operation, CalculatorOperation.Add, new { @class = "form-check-input", id = "opAdd" })
+            <label class="form-check-label" for="opAdd">+</label>
+        </div>
+
+        <div class="form-check">
+            @Html.RadioButtonFor(m => m.Operation, CalculatorOperation.Subtract, new { @class = "form-check-input", id = "opSub" })
+            <label class="form-check-label" for="opSub">-</label>
+        </div>
+
+        <div class="form-check">
+            @Html.RadioButtonFor(m => m.Operation, CalculatorOperation.Multiply, new { @class = "form-check-input", id = "opMul" })
+            <label class="form-check-label" for="opMul">*</label>
+        </div>
+
+        <div class="form-check">
+            @Html.RadioButtonFor(m => m.Operation, CalculatorOperation.Divide, new { @class = "form-check-input", id = "opDiv" })
+            <label class="form-check-label" for="opDiv">/</label>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" name="action" value="calculate" class="btn btn-primary me-2">Вычислить</button>
+        <button type="submit" name="action" value="clear" class="btn btn-danger">Очистить поля</button>
+    </div>
+
+    <hr />
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Result, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Result, new { @class = "form-control", disabled = "disabled" })
+    </div>
+
+    @if (Model != null && Model.Result == expected)
+    {
+        <div class="alert alert-success mt-3">
+            Результат совпал с ожидаемым значением (@expected).
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-3">
+            Результат (@Model?.Result) не равен ожидаемому значению (@expected).
+        </div>
+    }
+
+    <div class="mt-3">
+        @Html.ActionLink(
+            "Показать детали операции",
+            "Details",
+            "Calculator",
+            null,
+            new { @class = "btn btn-secondary" })
+    </div>
+
+    @Html.ValidationSummary(excludePropertyErrors: false, message: null, htmlAttributes: new { @class = "text-danger" })
+}
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+

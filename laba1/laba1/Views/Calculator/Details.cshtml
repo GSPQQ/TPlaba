@@ -1,0 +1,84 @@
+@model CalculatorModel
+
+@{
+    ViewData["Title"] = "Детали операции";
+    decimal expected = ViewBag.ExpectedResult is decimal d ? d : 0m;
+
+    string opSymbol = Model.Operation switch
+    {
+        CalculatorOperation.Add => "+",
+        CalculatorOperation.Subtract => "-",
+        CalculatorOperation.Multiply => "*",
+        CalculatorOperation.Divide => "/",
+        _ => "?"
+    };
+
+    string opText = Model.Operation switch
+    {
+        CalculatorOperation.Add => "сложение",
+        CalculatorOperation.Subtract => "вычитание",
+        CalculatorOperation.Multiply => "умножение",
+        CalculatorOperation.Divide => "деление",
+        _ => "операция"
+    };
+
+    bool hasData = Model?.Operand1 != null && Model?.Operand2 != null;
+}
+
+<h1 class="display-6">@ViewData["Title"]</h1>
+
+@if (!hasData)
+{
+    <div class="alert alert-info mt-3">
+        Нет данных в сессии. Сначала выполните расчёт на странице калькулятора.
+    </div>
+}
+else
+{
+    string operationLine = $"{Model.Operand1!.Value} {opSymbol} {Model.Operand2!.Value} = {Model.Result}";
+
+    int opIndex = operationLine.LastIndexOfAny(new[] { '+', '-', '*', '/' });
+    if (opIndex >= 0)
+    {
+        operationLine = operationLine.Remove(opIndex, 1).Insert(opIndex, opText);
+    }
+
+    <table class="table table-bordered mt-3">
+        <tr>
+            <th>Первый операнд (int)</th>
+            <td>@Model.Operand1!.Value</td>
+        </tr>
+        <tr>
+            <th>Операция</th>
+            <td>@opSymbol</td>
+        </tr>
+        <tr>
+            <th>Второй операнд (decimal)</th>
+            <td>@Model.Operand2!.Value</td>
+        </tr>
+        <tr>
+            <th>Результат</th>
+            <td>@Model.Result</td>
+        </tr>
+    </table>
+
+    <div class="alert alert-secondary mt-3">
+        @operationLine
+    </div>
+
+    @if (Model.Result == expected)
+    {
+        <div class="alert alert-success mt-3">
+            Результат совпал с ожидаемым значением (@expected).
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-3">
+            Результат (@Model.Result) не равен ожидаемому значению (@expected).
+        </div>
+    }
+}
+
+@Html.ActionLink("Назад к калькулятору", "Index", "Calculator", null, new { @class = "btn btn-outline-secondary mt-3" })
+

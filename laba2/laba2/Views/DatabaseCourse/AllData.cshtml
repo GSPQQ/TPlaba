@@ -1,0 +1,43 @@
+@model List<laba2.Models.DatabaseCourseModel>
+
+@{
+    ViewData["Title"] = "Просмотр всех данных";
+    var i = 0;
+}
+
+<h1>Просмотр всех данных</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m[0].Id)</th>
+            <th>@Html.DisplayNameFor(m => m[0].Title)</th>
+            <th>@Html.DisplayNameFor(m => m[0].Instructor)</th>
+            <th>@Html.DisplayNameFor(m => m[0].Credits)</th>
+            <th>@Html.DisplayNameFor(m => m[0].StartDate)</th>
+            <th>@Html.DisplayNameFor(m => m[0].TuitionFee)</th>
+            <th>@Html.DisplayNameFor(m => m[0].IsExamRequired)</th>
+            <th>@Html.DisplayNameFor(m => m[0].Semester)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @while (i < Model.Count)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => m[i].Id)</td>
+                <td>@Html.DisplayFor(m => m[i].Title)</td>
+                <td>@Html.DisplayFor(m => m[i].Instructor)</td>
+                <td>@Html.DisplayFor(m => m[i].Credits)</td>
+                <td>@Html.DisplayFor(m => m[i].StartDate)</td>
+                <td>@Html.DisplayFor(m => m[i].TuitionFee)</td>
+                <td>@Html.DisplayFor(m => m[i].IsExamRequired)</td>
+                <td>@Html.DisplayFor(m => m[i].Semester)</td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Назад к списку</a>
+</p>

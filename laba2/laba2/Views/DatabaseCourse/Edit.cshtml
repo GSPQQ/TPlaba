@@ -1,0 +1,19 @@
+@model laba2.Models.DatabaseCourseModel
+
+@{
+    ViewData["Title"] = "Редактирование курса";
+}
+
+<h1>Редактирование курса</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        @Html.LabelForModel()
+    </div>
+    <div class="mb-3">
+        @Html.EditorForModel()
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

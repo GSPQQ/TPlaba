@@ -1,0 +1,37 @@
+@model IEnumerable<laba2.Models.DatabaseCourseModel>
+
+@{
+    ViewData["Title"] = "Список курсов";
+}
+
+<h1>Список курсов</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Добавить курс</a>
+    <a asp-action="AllData" class="btn btn-outline-secondary">Просмотреть все данные (while)</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Преподаватель</th>
+            <th>Семестр</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(_ => item.Title)</td>
+            <td>@Html.DisplayFor(_ => item.Instructor)</td>
+            <td>@Html.DisplayFor(_ => item.Semester)</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Просмотр</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
