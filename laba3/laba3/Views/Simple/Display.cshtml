@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Display Exhibit";
+}
+
+<h2>Данные экспоната</h2>
+
+<ul>
+    <li><strong>Идентификатор:</strong> @ViewBag.Id</li>
+    <li><strong>Название:</strong> @ViewBag.ExhibitName</li>
+    <li><strong>Год происхождения:</strong> @ViewBag.OriginYear</li>
+    <li><strong>На экспозиции:</strong> @(ViewBag.IsOnDisplay ? "Да" : "Нет")</li>
+    <li><strong>Дата поступления:</strong> @ViewBag.AcquisitionDate</li>
+    <li><strong>Описание:</strong> @ViewBag.Description</li>
+</ul>
+
+<a asp-controller="Simple" asp-action="Index">Назад</a>

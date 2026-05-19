@@ -1,0 +1,15 @@
+@model IDictionary<string, object>
+@{
+    ViewData["Title"] = "Negative Id Submitted";
+}
+
+<h2>Отрицательный идентификатор</h2>
+<p>Переданные параметры и их значения:</p>
+<ul>
+@foreach(var kv in Model)
+{
+    <li>@kv.Key: @(kv.Value ?? "(null)")</li>
+}
+</ul>
+
+<a asp-controller="Simple" asp-action="Index">Назад</a>

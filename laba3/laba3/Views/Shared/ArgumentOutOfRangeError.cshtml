@@ -1,0 +1,25 @@
+@model IDictionary<string, object>
+@{
+    ViewData["Title"] = "ArgumentOutOfRangeException";
+}
+
+<h2>ArgumentOutOfRangeException обработано</h2>
+<p>@Model["ExceptionMessage"]</p>
+<p>Количество переменных в запросе: @Model["QueryCount"]</p>
+<h3>Параметры запроса:</h3>
+@{
+    var queryObj = Model.ContainsKey("Query") ? Model["Query"] as IDictionary<string, string> : null;
+}
+@if (queryObj == null || !queryObj.Any())
+{
+    <p><em>Параметров запроса нет.</em></p>
+}
+else
+{
+    <ul>
+    @foreach(var kv in queryObj)
+    {
+        <li>@kv.Key: @kv.Value</li>
+    }
+    </ul>
+}

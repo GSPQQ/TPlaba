@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Simple - Museum Entry";
+    var shortVal = string.IsNullOrEmpty(Context.Request.Query["shortVal"]) ? "1" : Context.Request.Query["shortVal"].ToString();
+    var doubleVal = string.IsNullOrEmpty(Context.Request.Query["doubleVal"]) ? "2.5" : Context.Request.Query["doubleVal"].ToString();
+}
+
+<h2>Ввод данных по предметной области «Краеведческий музей»</h2>
+
+<p>
+    <a asp-controller="Start" asp-action="Start" asp-route-id="0">IController: start, id=0</a>
+    ·
+    <a asp-controller="Simple" asp-action="Index" asp-route-shortVal="x" asp-route-doubleVal="1">Демо: FormatException</a>
+</p>
+
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<form asp-controller="Simple" asp-action="Index" method="post"
+      asp-route-shortVal="@shortVal"
+      asp-route-doubleVal="@doubleVal">
+    <div>
+        <label for="Id">Идентификатор экспоната (числовой, допускает null):</label>
+        @Html.TextBox("Id", null, new { type = "number", placeholder = "Оставьте пустым, если неизвестен" })
+    </div>
+
+    <div>
+        <label for="ExhibitName">Название экспоната:</label>
+        @Html.TextBox("ExhibitName", null, new { placeholder = "Например, Старинная икона" })
+    </div>
+
+    <div>
+        <label for="OriginYear">Год происхождения:</label>
+        @Html.TextBox("OriginYear", null, new { type = "number", placeholder = "Например, 1890" })
+    </div>
+
+    <div>
+        <label for="IsOnDisplay">На экспозиции:</label>
+        @Html.CheckBox("IsOnDisplay", false)
+    </div>
+
+    <div>
+        <label for="AcquisitionDate">Дата поступления в музей:</label>
+        @Html.TextBox("AcquisitionDate", null, new { type = "date" })
+    </div>
+
+    <div>
+        <label for="Description">Краткое описание/примечания:</label>
+        @Html.TextArea("Description", null, 5, 60, new { placeholder = "Материалы, состояние, примечания" })
+    </div>
+
+    <div>
+        <input type="submit" value="Сохранить" />
+    </div>
+</form>

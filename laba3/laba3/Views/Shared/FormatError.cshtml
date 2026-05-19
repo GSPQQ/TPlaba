@@ -1,0 +1,11 @@
+@model IDictionary<string, object>
+@{
+    ViewData["Title"] = "FormatException";
+}
+
+<h2>FormatException обработано</h2>
+<p>@Model["ExceptionMessage"]</p>
+<ul>
+    <li>shortVal: @Model["shortVal"]</li>
+    <li>doubleVal: @Model["doubleVal"]</li>
+</ul>
